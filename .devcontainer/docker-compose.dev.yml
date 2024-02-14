@@ -8,4 +8,4 @@ services:
             - 3000:3000
         volumes:
             - .:/workspace:cached
-        command: /bin/bash -c "cd /workspace && npm install && npm run build && npm run start"
+        command: /bin/bash -c "cd /workspace && npm install && while true; do sleep 3600; done"
