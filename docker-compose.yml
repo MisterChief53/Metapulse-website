@@ -1,0 +1,10 @@
+version: '3'
+services:
+    web-server:
+        build:
+            context: .
+        container_name: web-container
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/workspace:cached
