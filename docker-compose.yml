@@ -8,4 +8,6 @@ services:
             - 3000:3000
         volumes:
             - .:/workspace:cached
+            # this speeds up things so much, we avoid mounting our own node_modules, so as to use the container's file system!
+            - /workspace/node_modules 
         command: /bin/bash -c "cd /workspace && npm install && npm run build && npm run start"
