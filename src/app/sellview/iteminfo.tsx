@@ -1,5 +1,5 @@
 import { AlertDialog} from '@radix-ui/react-alert-dialog';
-import { AlertDialogDemo } from '../alertDialog';
+import { AlertDialogDemo } from '../alerDialog';
 
 export const ItemInfo = () => {
   return (

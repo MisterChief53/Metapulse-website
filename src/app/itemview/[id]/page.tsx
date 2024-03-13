@@ -1,5 +1,5 @@
 import Navbarr from '../../components/navbarR';
-import { AlertDialogDemo } from '../../alertDialog';
+import { AlertDialogDemo } from '../../alerDialog';
 import { AlertDialog} from '@radix-ui/react-alert-dialog';
 
 

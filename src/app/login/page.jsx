@@ -1,7 +1,6 @@
-import { AlertDialogDemo } from '../alertDialog';
+
 import '../login/login.css';
-import { AlertDialog
- } from '@radix-ui/react-alert-dialog';
+
 function Login() {
   return (
     <div className="login">
