@@ -76,7 +76,7 @@ body {
     height: 140px;
     border-radius: 50%;
     overflow: hidden;
-    background-image: url('/Metapulse-dev-env/WebServer/public/images/logo_sol.png');
+    background-image: url('../../../public/images/logo_sol.png');
   }
   
   .circle-image img {

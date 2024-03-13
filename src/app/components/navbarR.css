@@ -1,0 +1,51 @@
+ 
+
+  .logo{
+    border-radius: 30px;
+    width: 180px;
+    height: 50px;
+    padding: 10px;
+    background-image: url('../../../public/images/letras_metapulse.png');
+    background-size: cover;
+    box-shadow: 0 0 30px 15px rgba(22, 168, 245, 0.5); 
+    outline: 1px solid rgba(22, 168, 245, 0.5); 
+  }
+
+  #icon_moneda {
+    border-radius: 50%; 
+    background-image: url('../../../public/images/coin.png');
+    background-size: cover;
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-icon {
+    border-radius: 50%; 
+    color: white;
+    background-color: #BCB9F4; 
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttons button {
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 21.6px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .white-text {
+    color: white;
+  }
+   

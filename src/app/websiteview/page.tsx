@@ -16,7 +16,6 @@ async function Page() {
         <Items items={items} />
       </div>
     </div>
-    
   );
 }
 
