@@ -1,6 +1,6 @@
 import { Inventory } from './inventory';
 import { ItemInfo } from './iteminfo';
-import NavbarR from '../components/navbarR';
+import NavbarR from '../componentes/navbarR';
 
 
 const Page = () => {

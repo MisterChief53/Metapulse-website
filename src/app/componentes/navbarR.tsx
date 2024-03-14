@@ -1,7 +1,6 @@
 "use client"
 import {useRouter} from 'next/navigation'
 import React from 'react';
-import '../components/navbarR.css';
 import Link from 'next/link';
 
 const Navbarr = () => {

@@ -1,5 +1,5 @@
-import NavbarR from '../components/navbarR';
-import Items from '../components/items';
+import NavbarR from '../componentes/navbarR';
+import Items from '../componentes/items';
 
 async function fetchItems() {
   const res = await fetch('https://fakestoreapi.com/products/');
