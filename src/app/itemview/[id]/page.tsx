@@ -4,7 +4,7 @@ import { AlertDialog} from '@radix-ui/react-alert-dialog';
 
 
 async function getItem(id) {
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const res = await fetch(`http://localhost:8080/sales/items/${id}`);
   const data = await res.json();
   return data;
 }
@@ -20,12 +20,12 @@ async function ItemViewPage({ params }) {
         {/* Lado izquierdo */}
         <div className="w-1/2 flex flex-col p-8">
           <label htmlFor="titleItem" className="text-textGray text-3xl ">
-            {item.category}
+            {item.item.name}
           </label>
           {/* Imagen item */}
           <div className="h-3/4 mx-auto">
             <div className="h-full rounded-md overflow-hidden">
-              <img src={item.image} alt="Imagen item" />
+              <img src={item.item.imagePath} alt="Imagen item" />
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@ async function ItemViewPage({ params }) {
               <textarea
                 id="descripcionItem"
                 className="w-full h-full rounded-md resize-none"
-                value={item.description}
+                value={item.item.description}
                 readOnly
               ></textarea>
             </div>

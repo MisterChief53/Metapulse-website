@@ -2,10 +2,13 @@
 import '../login/login.css';
 import { useState } from 'react'; // Import useState hook for error message
 
+
 function Login() {
+
   const [name, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [mensajeError, setMensajeError] = useState(''); // State for error message
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +28,8 @@ function Login() {
         const token = await response.text();
         console.log('Inicio de sesión exitoso, aquí tienes tu token:', token);
         localStorage.setItem('token', token); // El token es guardado como variable local en el navegador para uso posterior
-
+        
+        window.location.href = '/websiteview';
         // Lo siguiente es una prueba de autenticacion con el token, se manda a llamar al endpoint /auth/secure
         // que es un endpoint de prueba para verificar el endpoint, se supone que cada endpoint que necesite 
         // verificacion solo deba de pedir el token, el token se manda por el header
@@ -39,6 +43,7 @@ function Login() {
         if (profileResponse.status === 200) {
           const userData = await profileResponse.text();
           console.log('El usuario es:', userData);
+          
         } else {
           console.log('No se encontro tal usuario');
         }
