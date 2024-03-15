@@ -20,7 +20,7 @@ function Items({ items }) {
           onClick={() => handleClick(item.id)}
         >
           <img
-            src={item.image}
+            src={item.item.imagePath}
             style={{ width: '288px', height: '180px', padding: '16px' }}
           />
           <div>
@@ -38,7 +38,7 @@ function Items({ items }) {
               </div>
             </div>
           
-          <h5 className="text-white">{item.category}</h5>
+          <h5 className="text-white">{item.item.name}</h5>
           
         </div>
       ))}
