@@ -4,7 +4,12 @@ import { AlertDialog} from '@radix-ui/react-alert-dialog';
 
 
 async function getItem(id) {
-  const res = await fetch(`http://localhost:8080/sales/items/${id}`);
+  // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
+  const res = await fetch(`http://localhost:8080/sales/items/${id}`, 
+  {
+    method: 'GET',
+  });
+
   const data = await res.json();
   return data;
 }
@@ -64,7 +69,7 @@ async function ItemViewPage({ params }) {
             </div>
             {/* Boton buy */}
             <div>
-              <AlertDialogDemo buttonText="Buy" />
+              <AlertDialogDemo buttonText="Buy" idItem = {params.id}/>
             </div>
           </div>
         </div>
