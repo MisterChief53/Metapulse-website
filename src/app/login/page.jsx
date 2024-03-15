@@ -10,21 +10,39 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const name = event.target.name.value;
-    const password = event.target.password.value;
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('password', password);
 
     try {
       const response = await fetch('http://localhost:8080/auth/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name, password }),
-});
-
+        method: 'POST',
+        body: formData,
+      });
 
       if (response.status === 200) {
         // Inicio de sesión exitoso, maneja los datos de respuesta (potencialmente un token)
-        const datos = await response.json();
-        console.log('Inicio de sesión exitoso:', datos);
+        const token = await response.text();
+        console.log('Inicio de sesión exitoso, aquí tienes tu token:', token);
+        localStorage.setItem('token', token); // El token es guardado como variable local en el navegador para uso posterior
+
+        // Lo siguiente es una prueba de autenticacion con el token, se manda a llamar al endpoint /auth/secure
+        // que es un endpoint de prueba para verificar el endpoint, se supone que cada endpoint que necesite 
+        // verificacion solo deba de pedir el token, el token se manda por el header
+        const profileResponse = await fetch('http://localhost:8080/auth/secure', {
+          method: 'GET',
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        if (profileResponse.status === 200) {
+          const userData = await profileResponse.text();
+          console.log('El usuario es:', userData);
+        } else {
+          console.log('No se encontro tal usuario');
+        }
+
         // Almacena el token en el almacenamiento local o úsalo para llamadas API posteriores
       } else {
         throw new Error('Inicio de sesión fallido');
