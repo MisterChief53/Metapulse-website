@@ -2,6 +2,7 @@
 import {useRouter} from 'next/navigation'
 import React from 'react';
 import Link from 'next/link';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../../components/ui/accordion';
 
 const Navbarr = () => {
 
@@ -28,7 +29,15 @@ const Navbarr = () => {
 
         <div className="bg-purple-300 rounded-full p-2 text-white cursor-pointer">
           RM
+          
         </div>
+        
+        <Accordion type="multiple"> {/* Asegúrate de definir el tipo como "multiple" */}
+        <AccordionItem value="1">
+            <AccordionTrigger>US</AccordionTrigger>
+            <AccordionContent>Sign out</AccordionContent>
+          </AccordionItem>
+        </Accordion>
         <Link href="/sellview">
         <button className="bg-blueButton px-4 py-2 text-white font-bold rounded-lg">
           Sell
