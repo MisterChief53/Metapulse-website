@@ -8,21 +8,23 @@ import { useState, useEffect } from 'react';
 
 const Navbarr = () => {
   const router = useRouter()
-  const [userData, setUserData] = useState({ nombre: '', dinero: 0 });
+  const [userData, setUserData] = useState({ name: '', money: 0 });
   useEffect(() => {
     const obtenerDatosUsuario = async () => {
         const token = localStorage.getItem('token');
 
         if (token) {
             try {
-                const respuesta = await fetch('http://localhost:8080/auth/profile', {
+                const respuesta = await fetch('http://localhost:8080/auth/userInfo', {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: token,
                     },
                 });
 
                 if (respuesta.ok) {
                     const datos = await respuesta.json();
+                    console.log(datos);
+                    
                     setUserData(datos);
                 }
             } catch (error) {
@@ -51,7 +53,7 @@ const Navbarr = () => {
       <div className="flex w-1/2 items-center justify-end gap-16 mr-8">
         <div className="flex items-center gap-4">
           <img src="/images/coin.png" alt="monedas jugador" className="w-10" />
-          <div className="text-white">{userData.dinero}</div>
+          <div className="text-white">{userData.money}</div>
         </div>
 
         <Accordion type="multiple"> 
