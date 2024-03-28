@@ -31,22 +31,19 @@ const AccordionTrigger = React.forwardRef<
         "flex items-center justify-between py-4 font-medium transition-all hover:underline",
         className
       )}
-      // Estilo para eliminar el subrayado
       style={{ textDecoration: 'none' }}
       {...props}
     >
-      <div className="bg-purple-300 rounded-full p-2 text-white cursor-pointer">
-        {/* Aquí muestra el nombre del usuario de forma circular */}
-        Usuario
-      </div>
+
+    <div className="bg-purple-300 rounded-full p-2 text-white cursor-pointer">
+     RM
+     </div>
+      {children}
       <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
-
-
-
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -55,17 +52,16 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    style={{ border: 'none' }} // Estilo para eliminar la línea divisoria
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>
-      {/* Aquí colocamos el botón de "Sign out" con estilos personalizados */}
       <button className="text-white text-lg" >
-        Sign out
+        Sign Out
       </button>
     </div>
   </AccordionPrimitive.Content>
 ))
+
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

@@ -4,9 +4,36 @@ import React from 'react';
 import Link from 'next/link';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../../components/ui/accordion';
 
-const Navbarr = () => {
+import { useState, useEffect } from 'react';
 
+const Navbarr = () => {
   const router = useRouter()
+  const [userData, setUserData] = useState({ nombre: '', dinero: 0 });
+  useEffect(() => {
+    const obtenerDatosUsuario = async () => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            try {
+                const respuesta = await fetch('http://localhost:8080/auth/profile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (respuesta.ok) {
+                    const datos = await respuesta.json();
+                    setUserData(datos);
+                }
+            } catch (error) {
+                console.error('Error al obtener datos del usuario:', error);
+            }
+        }
+    };
+
+    obtenerDatosUsuario();
+}, []);
+ 
 
   return (
     <header className="flex bg-navbarPurple py-4">
@@ -24,18 +51,13 @@ const Navbarr = () => {
       <div className="flex w-1/2 items-center justify-end gap-16 mr-8">
         <div className="flex items-center gap-4">
           <img src="/images/coin.png" alt="monedas jugador" className="w-10" />
-          <div className="text-white">20000</div>
+          <div className="text-white">{userData.dinero}</div>
         </div>
 
-        <div className="bg-purple-300 rounded-full p-2 text-white cursor-pointer">
-          RM
-          
-        </div>
-        
-        <Accordion type="multiple"> {/* Asegúrate de definir el tipo como "multiple" */}
+        <Accordion type="multiple"> 
         <AccordionItem value="1">
-            <AccordionTrigger>US</AccordionTrigger>
-            <AccordionContent>Sign out</AccordionContent>
+            <AccordionTrigger></AccordionTrigger>
+            <AccordionContent></AccordionContent>
           </AccordionItem>
         </Accordion>
         <Link href="/sellview">
