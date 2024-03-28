@@ -60,7 +60,7 @@ function Login() {
 
   return (
     <div className="login">
-      <h1><strong>USER LOGIN</strong></h1>
+      <h1><strong>USER OGIN</strong></h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" value={name} onChange={(e) => setUserName(e.target.value)} />
         <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
