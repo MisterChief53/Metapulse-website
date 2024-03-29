@@ -4,7 +4,9 @@ import Items from '../componentes/items';
 async function fetchItems() {
   const res = await fetch('http://localhost:8080/sales/items',{
     method:"GET",
+    cache: 'no-store'
   });
+  
   const data = await res.json();
   return data;
 }

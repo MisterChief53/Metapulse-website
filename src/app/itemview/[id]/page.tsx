@@ -5,7 +5,8 @@ import { AlertDialog} from '@radix-ui/react-alert-dialog';
 
 async function getItem(id) {
   const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
-    method:'GET'
+    method:'GET',
+    cache: 'no-store',
   });
   
   const data = await res.json();
