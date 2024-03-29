@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils"
 
 const Accordion = AccordionPrimitive.Root
 
+interface AccordionTriggerProps
+  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {
+  userName?: string;
+}
+
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
@@ -20,10 +25,11 @@ const AccordionItem = React.forwardRef<
 ))
 AccordionItem.displayName = "AccordionItem"
 
+
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  AccordionTriggerProps
+>(({ className, children, userName, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
@@ -34,16 +40,18 @@ const AccordionTrigger = React.forwardRef<
       style={{ textDecoration: 'none' }}
       {...props}
     >
+      <div className="bg-purple-300 h-10 w-10 flex items-center justify-center rounded-full cursor-pointer">
+  <span className="text-white text-xl">
+    {userName ? userName.charAt(0) : 'U'}
+  </span>
+</div>
 
-    <div className="bg-purple-300 rounded-full p-2 text-white cursor-pointer">
-     RM
-     </div>
       {children}
       <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
-))
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
+));
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -55,7 +63,7 @@ const AccordionContent = React.forwardRef<
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>
-      <button className="text-white text-lg" >
+      <button className="text-white text-sm" >
         Sign Out
       </button>
     </div>

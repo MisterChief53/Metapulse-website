@@ -7,23 +7,30 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '..
 import { useState, useEffect } from 'react';
 
 const Navbarr = () => {
-  const router = useRouter()
-  const [userData, setUserData] = useState({ nombre: '', dinero: 0 });
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    router.push('/');
+  };
+
+  const [userData, setUserData] = useState({name: '', money: 0});
   useEffect(() => {
-    const obtenerDatosUsuario = async () => {
+    const fetchUserInfo = async () => {
         const token = localStorage.getItem('token');
+        console.log('Token obtenido:', token); 
 
         if (token) {
             try {
-                const respuesta = await fetch('http://localhost:8080/auth/profile', {
+                const response = await fetch('http://localhost:8080/auth/userInfo', {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: token,
                     },
                 });
 
-                if (respuesta.ok) {
-                    const datos = await respuesta.json();
-                    setUserData(datos);
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserData(data);
                 }
             } catch (error) {
                 console.error('Error al obtener datos del usuario:', error);
@@ -31,7 +38,7 @@ const Navbarr = () => {
         }
     };
 
-    obtenerDatosUsuario();
+    fetchUserInfo();
 }, []);
  
 
@@ -51,15 +58,17 @@ const Navbarr = () => {
       <div className="flex w-1/2 items-center justify-end gap-16 mr-8">
         <div className="flex items-center gap-4">
           <img src="/images/coin.png" alt="monedas jugador" className="w-10" />
-          <div className="text-white">{userData.dinero}</div>
+          <div className="text-white">{userData.money}</div>
         </div>
+
 
         <Accordion type="multiple"> 
         <AccordionItem value="1">
-            <AccordionTrigger></AccordionTrigger>
-            <AccordionContent></AccordionContent>
+            <AccordionTrigger userName={userData.name}></AccordionTrigger>
+            <AccordionContent onClick={handleSignOut}></AccordionContent>
           </AccordionItem>
         </Accordion>
+       
         <Link href="/sellview">
         <button className="bg-blueButton px-4 py-2 text-white font-bold rounded-lg">
           Sell
@@ -71,3 +80,4 @@ const Navbarr = () => {
 };
 
 export default Navbarr;
+
