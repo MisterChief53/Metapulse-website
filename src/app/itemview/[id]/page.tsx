@@ -45,7 +45,7 @@ async function ItemViewPage({ params }) {
               <textarea
                 id="descripcionItem"
                 className="w-full h-full rounded-md resize-none"
-                value={item.item.description}
+                value={item.description}
                 readOnly
               ></textarea>
             </div>

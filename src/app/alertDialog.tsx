@@ -16,30 +16,30 @@ import {
   async function buyItem({id}) {
     console.log(`el id es: ${id}`);
 
-    const params = id;
-    const headers = {
-      Authorization: localStorage['token'],
-    }
+    try{
+      const itemResponse = await fetch(`http://localhost:8080/sales/items/${id}`);
+      const itemData = await itemResponse.json();
 
-    console.log(params);
-    console.log(headers);
-    
-    
+    const generalItemId = itemData.item.id;
     
     // const res = await fetch(`http://localhost:8080/sales/buy/${id}/${params}/${headers}`);
 
-    const res = await fetch(`http://localhost:8080/sales/buy/${id}`, {
+    const saleResponse = await fetch(`http://localhost:8080/sales/buy/${generalItemId}`, {
           method: 'POST',
           headers: {
             Authorization: localStorage['token'],
           },
         });
-
-
-        console.log(res);
-    const data = await res.text();
-    
-    return data;
+      
+      if(saleResponse.ok){
+        console.log('sale completed successfully');
+      }else{
+        console.error('Error while processing the sale');
+      }
+    } catch(error){
+      console.error('Error processing the request', error);
+    }
+       
   }
   
   export function AlertDialogDemo({ buttonText, idItem }) {
