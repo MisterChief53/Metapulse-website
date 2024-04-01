@@ -43,7 +43,6 @@ function Login() {
         if (profileResponse.status === 200) {
           const userData = await profileResponse.text();
           console.log('El usuario es:', userData);
-          localStorage.setItem('token', userData.name); // El token es guardado como variable local en el navegador para uso posterior
         } else {
           console.log('No se encontro tal usuario');
         }
