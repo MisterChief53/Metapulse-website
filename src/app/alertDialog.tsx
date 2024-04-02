@@ -12,6 +12,11 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import { Button } from "@/components/ui/button"
+  import * as React from 'react';
+  import {useState} from 'react';
+
+
+  //const [purchaseStatus, setPurchaseStatus] = useState(null);
 
   async function buyItem({id}) {
     console.log(`el id es: ${id}`);
@@ -19,7 +24,6 @@ import {
     try{
       const itemResponse = await fetch(`http://localhost:8080/sales/items/${id}`);
       const itemData = await itemResponse.json();
-
     const generalItemId = itemData.item.id;
     
     // const res = await fetch(`http://localhost:8080/sales/buy/${id}/${params}/${headers}`);
@@ -32,11 +36,14 @@ import {
         });
       
       if(saleResponse.ok){
+    //    setPurchaseModalVisible(true);
         console.log('sale completed successfully');
       }else{
+      //  setPurchaseModalVisible(true);
         console.error('Error while processing the sale');
       }
     } catch(error){
+      //setPurchaseModalVisible(true);
       console.error('Error processing the request', error);
     }
        
