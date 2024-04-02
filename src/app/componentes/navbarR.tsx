@@ -14,31 +14,45 @@ const Navbarr = () => {
     router.push('/');
   };
 
+  const token = localStorage.getItem('token');
+
+  const handleSellClick = () => {
+    // Verificar que el token esté definido antes de redirigir
+    if (token) {
+      // Redirigir a la página sellview con el token como parámetro de consulta
+      router.push(`/sellview?token=${token}`);
+    }
+  };
+
+ 
+
   const [userData, setUserData] = useState({name: '', money: 0});
   useEffect(() => {
-    const fetchUserInfo = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token obtenido:', token); 
+    const fetchUserInfo = async (token) => {
+        //const token = localStorage.getItem('token');
+        console.log('Token obtenido en nav:', token); 
 
-        if (token) {
+        //if (token) {
             try {
+              if(token){
                 const response = await fetch('http://localhost:8080/auth/userInfo', {
-                    headers: {
-                        Authorization: token,
-                    },
-                });
+                  headers: {
+                      Authorization: token,
+                  },
+              });
 
                 if (response.ok) {
                     const data = await response.json();
                     setUserData(data);
                 }
+              }
             } catch (error) {
                 console.error('Error al obtener datos del usuario:', error);
             }
-        }
     };
-
-    fetchUserInfo();
+    
+    const token = localStorage.getItem('token');
+    fetchUserInfo(token);//Se pasa como parametrp
 }, []);
  
 
@@ -69,11 +83,12 @@ const Navbarr = () => {
           </AccordionItem>
         </Accordion>
        
-        <Link href="/sellview">
-        <button className="bg-blueButton px-4 py-2 text-white font-bold rounded-lg">
-          Sell
-        </button>
-        </Link>
+        <button 
+        className="bg-blueButton px-4 py-2 text-white font-bold rounded-lg"
+        onClick={handleSellClick}
+      >
+        Sell
+      </button>
       </div>
     </header>
   );

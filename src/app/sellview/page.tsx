@@ -29,9 +29,10 @@ const Page = async () => {
     }
   };
 
-  const fetchUserData = async () => {
+  const fetchUserData = async (token) => {
     try {
-      const token = localStorage.getItem('token');
+     // const token = localStorage.getItem('token');
+     console.log('Token recibido en fetchUserData:', token); 
       if (token) {
         const response = await fetch('http://localhost:8080/auth/userInfo', {
           headers: {
