@@ -1,4 +1,58 @@
-export const Inventory = async () => {
+import ItemsList from '../sellview/itemsList';
+
+export const Inventory = async ({ token }) => {
+  const getUserItems = async (name) => {
+    console.log('name getUserItems:');
+    console.log(name);
+
+    try {
+      let formData = new FormData();
+      formData.append('name', name);
+      const res = await fetch('http://localhost:8080/items/getItemsUser', {
+        method: 'post',
+        body: formData,
+      });
+
+      console.log('Respuesta:');
+      console.log(res.status);
+
+      if (res.ok) {
+        const data = await res.json();
+        return data;
+      }
+    } catch (error) {
+      console.log(
+        'Ha ocurrido un error al obtener los items del usuario:' + error
+      );
+    }
+  };
+
+  const fetchUserInfo = async (token) => {
+    //const token = localStorage.getItem('token');
+    console.log('Token obtenido en nav:', token);
+
+    //if (token) {
+    try {
+      if (token) {
+        const response = await fetch('http://localhost:8080/auth/userInfo', {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          return data;
+        }
+      }
+    } catch (error) {
+      console.error('Error al obtener datos del usuario:', error);
+    }
+  };
+
+  const userInfo = await fetchUserInfo(token); //Se pasa como parametrp
+  const itemsList = await getUserItems(userInfo.name);
+
   return (
     <div className="w-1/2 h-full flex flex-col">
       <h1 className="text-textGray font-bold text-4xl">Your inventory</h1>
@@ -15,50 +69,9 @@ export const Inventory = async () => {
           style={{ maxHeight: '470px' }} //
           id="ContenedorItems"
         >
-          {/* Aquí se deberían de renderizar todos los items del usuario con un map */}
-          {/* <ButtonInventory name="Item 1" />
-          <ButtonInventory name="Item 2" />
-          <ButtonInventory name="Item 3" />
-          <ButtonInventory name="Item 4" />
-          <ButtonInventory name="Item 5" />
-          <ButtonInventory name="Item 6" />
-          <ButtonInventory name="Item 7" />
-          <ButtonInventory name="Item 8" /> */}
+          <ItemsList itemsList={itemsList} />
         </div>
       </form>
     </div>
   );
-};
-
-export const getServerSideProps = async (context) => {
-  console.log('dentro de serverprops');
-
-  try {
-    const token = context.req.cookies.token; // Obtener el token de las cookies del servidor
-    if (token) {
-      const response = await fetch('http://localhost:8080/auth/userInfo', {
-        headers: {
-          Authorization: token,
-        },
-      });
-      if (response.ok) {
-        const userData = await response.json();
-        const itemsList = await getUserItems(userData?.name);
-        return {
-          props: {
-            user: userData,
-            itemsList: itemsList || [],
-          },
-        };
-      }
-    }
-  } catch (err) {
-    console.error(err);
-  }
-  return {
-    props: {
-      user: null,
-      itemsList: [],
-    },
-  };
 };
