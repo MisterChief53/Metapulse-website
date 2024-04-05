@@ -85,9 +85,9 @@ const Navbarr = () => {
         <Link
           href={{
             pathname: '/sellview',
-            query: {
-              token: token,
-            },
+            // query: {
+            //   token: token,
+            // },
           }}
         >
           <button className="bg-blueButton px-4 py-2 text-white font-bold rounded-lg">
