@@ -54,6 +54,11 @@ import {
     const handleAccept = () => {
       buyItem({ id: idItem, setModalExitoAbierto, setModalErrorAbierto });
     };
+
+    const returnToMenu = () => {
+      setModalExitoAbierto(false);
+      window.location.href = 'http://localhost:3000/websiteview';
+    };
   
     return (
       <>
@@ -84,15 +89,19 @@ import {
         </AlertDialog>
   
         <AlertDialog open={modalExitoAbierto}>
-        <AlertDialogContent className="bg-backgroundBlue border-2 border-blue-500 shadow-lg hover:shadow-blue-700 boxShadow = '0px 0px 15px 7px rgba(0, 0, 255, 0.5)'">
+        <AlertDialogContent className="bg-backgroundBlue border-2 border-blue-500 shadow-lg hover:shadow-blue-700 boxShadow = '0px 0px 15px 7px rgba(0, 0, 255, 0.5)' flex justify-center items-center flex-col">
+        <div className="w-28 h-28 rounded-full bg-green-500 flex justify-center items-center">
+      <span className="text-white text-6xl font-bold">✅</span>
+    </div>
           <AlertDialogHeader>
+          
               <AlertDialogTitle className="text-white text-xl">Confirmed purchase</AlertDialogTitle>
           </AlertDialogHeader>
            
          
           <AlertDialogFooter>
           <AlertDialogAction className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          onClick={() => setModalExitoAbierto(false)}>Return to menu</AlertDialogAction>
+         onClick={returnToMenu}>Return to menu</AlertDialogAction>
           </AlertDialogFooter>
            </AlertDialogContent>
         </AlertDialog>
