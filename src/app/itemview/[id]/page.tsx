@@ -1,12 +1,10 @@
+import { AlertDialogDemo } from '@/app/alertDialog';
 import Navbarr from '../../componentes/navbarR';
-import { AlertDialogDemo } from '../../alertDialog';
-import { AlertDialog} from '@radix-ui/react-alert-dialog';
-
+import { AlertDialog } from '@radix-ui/react-alert-dialog';
 
 async function getItem(id) {
   // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
-  const res = await fetch(`http://localhost:8080/sales/items/${id}`, 
-  {
+  const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
     method: 'GET',
   });
 
@@ -19,7 +17,6 @@ async function ItemViewPage({ params }) {
 
   return (
     <div className="bg-backgroundBlue min-h-screen w-screen flex flex-col mx-auto p-0 overflow-y-auto">
-      
       <Navbarr />
       <div className="flex bg-backgroundPurple h-96 w-5/6 mx-auto mt-12 rounded-md">
         {/* Lado izquierdo */}
@@ -38,7 +35,10 @@ async function ItemViewPage({ params }) {
         <div className="w-1/2 p-8 flex flex-col">
           {/* Descripcion item */}
           <div className="h-1/2 w-full mx-auto flex flex-col mt-6 gap-4">
-            <label htmlFor="descripcionItem" className="text-textGray text-3xl ">
+            <label
+              htmlFor="descripcionItem"
+              className="text-textGray text-3xl "
+            >
               Description
             </label>
             <div className="w-full h-full">
@@ -69,7 +69,7 @@ async function ItemViewPage({ params }) {
             </div>
             {/* Boton buy */}
             <div>
-              <AlertDialogDemo buttonText="Buy" idItem = {params.id}/>
+              <AlertDialogDemo buttonText="Buy" idItem={params.id} />
             </div>
           </div>
         </div>

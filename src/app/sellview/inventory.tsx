@@ -1,23 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useItemDetailContext } from '../context/itemContext';
 import ItemsList from '../sellview/itemsList';
 import { ItemInfo } from './iteminfo';
-// import { useUserContext } from '../context/userContext';
 
 export const Inventory = () => {
-  const { itemDetails, setItemDetails } = useItemDetailContext();
-  // const { userData, setUserData, tokenS } = useUserContext();
+  const [itemDetails, setItemDetails] = useState({});
   const [userData, setUserData] = useState({});
   const [userItems, setUserItems] = useState([]);
   const [tokenState, setTokenState] = useState('');
 
   useEffect(() => {
     const getUserItems = async (name) => {
-      // setUserItems([]);
-      console.log('name getUserItems:');
-      console.log(name);
-
       try {
         let formData = new FormData();
         formData.append('name', name);
@@ -27,12 +20,8 @@ export const Inventory = () => {
           cache: 'no-cache',
         });
 
-        console.log('Respuesta:');
-        console.log(res.status);
-
         if (res.ok) {
           const data = await res.json();
-          // setItemDetails(data);
           setUserItems(data);
           return data;
         }
@@ -45,8 +34,6 @@ export const Inventory = () => {
 
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
-      // console.log('Token obtenido en fetchUSerInfo:', token);
-
       if (token) {
         setTokenState(token);
         try {
@@ -62,8 +49,6 @@ export const Inventory = () => {
 
             if (response.ok) {
               const data = await response.json();
-              console.log(data);
-
               setUserData(data);
               await getUserItems(data.name);
             }
@@ -79,7 +64,7 @@ export const Inventory = () => {
 
   return (
     <>
-      <div className="w-1/2 h-full flex flex-col">
+      <div className="w-1/2 flex flex-col">
         <h1 className="text-textGray font-bold text-4xl">Your inventory</h1>
         <form action="" className="mt-4 flex flex-col h-full">
           <input
@@ -94,21 +79,13 @@ export const Inventory = () => {
             style={{ maxHeight: '470px' }} //
             id="ContenedorItems"
           >
-            {/* <button
-              onClick={async (e) => {
-                e.preventDefault();
-                // await fetchUserInfo();
-
-                // await getUserItems(userData.name);
-              }}
-            >
-              Fetch items
-            </button> */}
             <ItemsList itemsList={userItems} setItemDetails={setItemDetails} />
           </div>
         </form>
       </div>
-      <ItemInfo itemDetails={itemDetails} />
+      {itemDetails.id && (
+        <ItemInfo itemDetails={itemDetails} setItemDetails={setItemDetails} />
+      )}
     </>
   );
 };

@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { ButtonInventory } from './buttonInventory';
-import { useItemDetailContext } from '../context/itemContext';
 
 const ItemsList = ({ itemsList, setItemDetails }) => {
   return (

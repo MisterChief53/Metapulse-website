@@ -1,19 +1,22 @@
 'use client';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
-import { AlertDialogDemo } from '../alertDialog';
+import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
 
-export const ItemInfo = ({ itemDetails }) => {
-  // const [itemDetails, setItemDetails] = useState({
-  //   id: 0,
-  //   name: 'default',
-  //   description: 'Default description',
-  //   code: '0',
-  //   username: '',
-  //   imagePath: '',
-  //   ip: '',
-  //   tradableStatus: false,
-  // });
+export const ItemInfo = ({ itemDetails, setItemDetails }) => {
+  const setItemDescription = (e) => {
+    setItemDetails({
+      ...itemDetails,
+      ['descripcion']: e.currentTarget.value,
+    });
+  };
+
+  const setItemPrice = (e) => {
+    setItemDetails({
+      ...itemDetails,
+      ['price']: Number(e.currentTarget.value),
+    });
+  };
 
   return (
     <div className="w-1/2 bg-backgroundPurple rounded-md flex flex-col p-6 h-full">
@@ -49,10 +52,12 @@ export const ItemInfo = ({ itemDetails }) => {
 
             <input
               type="text"
-              name="infoItem"
+              name="price"
               id="InfoItems"
               placeholder="Enter the price"
               className="rounded-md p-2 w-3/4 placeholder-gray-500 text-xl font-bold"
+              defaultValue={itemDetails.price}
+              onChange={setItemPrice}
             />
           </div>
         </div>
@@ -65,16 +70,16 @@ export const ItemInfo = ({ itemDetails }) => {
           id="desc_item"
           placeholder="Write a description"
           className="w-full resize-none h-40 rounded-md"
-        >
-          {itemDetails.description}
-        </textarea>
+          onChange={setItemDescription}
+          defaultValue={itemDetails.description}
+        ></textarea>
       </div>
 
       {/* Flex-row 3 */}
       <div className="flex flex-grow justify-end">
         {/* Boton sell */}
         <div>
-          <AlertDialogDemo buttonText="Sell" />
+          <AlertDialogSell buttonText="Sell" itemDetails={itemDetails} />
         </div>
       </div>
     </div>

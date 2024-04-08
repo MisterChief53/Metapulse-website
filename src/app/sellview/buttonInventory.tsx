@@ -1,8 +1,3 @@
-// type Props = {
-//   name: string;
-//   setItemDetails:
-// };
-
 export const ButtonInventory = ({ item, setItemDetails }) => {
   return (
     <button
