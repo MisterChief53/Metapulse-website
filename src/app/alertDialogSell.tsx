@@ -15,26 +15,33 @@ import { Button } from '@/components/ui/button';
 import * as React from 'react';
 import { useState } from 'react';
 
-async function buyItem({ id, setModalExitoAbierto, setModalErrorAbierto }) {
-  console.log(`el id es: ${id}`);
-
-
+async function sellItem({
+  itemDetails,
+  setModalExitoAbierto,
+  setModalErrorAbierto,
+}) {
   try {
-    const itemResponse = await fetch(`http://localhost:8080/sales/items/${id}`);
-    const itemData = await itemResponse.json();
-    const generalItemId = itemData.item.id;
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', localStorage['token']);
 
-    const saleResponse = await fetch(
-      `http://localhost:8080/sales/buy/${generalItemId}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: localStorage['token'],
-        },
-      }
+    const formdata = new FormData();
+    formdata.append('item_id', itemDetails.id.toString());
+    formdata.append('price', itemDetails.price.toString());
+    formdata.append('description', itemDetails.descripcion.toString());
+
+    const reqOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    const itemResult = await fetch(
+      'http://localhost:8080/sales/items',
+      reqOptions
     );
 
-    if (saleResponse.ok) {
+    if (itemResult.ok) {
       console.log('sale completed successfully');
       setModalExitoAbierto(true);
       setModalErrorAbierto(false);
@@ -50,19 +57,18 @@ async function buyItem({ id, setModalExitoAbierto, setModalErrorAbierto }) {
   }
 }
 
-export function AlertDialogDemo({ buttonText, idItem }) {
+export function AlertDialogSell({ buttonText, itemDetails }) {
   const [modalExitoAbierto, setModalExitoAbierto] = useState(false);
   const [modalErrorAbierto, setModalErrorAbierto] = useState(false);
 
   const handleAccept = () => {
-    buyItem({ id: idItem, setModalExitoAbierto, setModalErrorAbierto });
+    sellItem({ itemDetails, setModalExitoAbierto, setModalErrorAbierto });
   };
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);
     window.location.href = 'http://localhost:3000/websiteview';
   };
-
   return (
     <>
       <AlertDialog>
@@ -77,8 +83,6 @@ export function AlertDialogDemo({ buttonText, idItem }) {
               Do you want to continue?
             </AlertDialogTitle>
           </AlertDialogHeader>
-           
-         
           <AlertDialogFooter>
             <AlertDialogCancel
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
