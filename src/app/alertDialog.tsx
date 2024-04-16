@@ -15,7 +15,15 @@ import { Button } from '@/components/ui/button';
 import * as React from 'react';
 import { useState } from 'react';
 
-async function buyItem({ id, setModalExitoAbierto, setModalErrorAbierto }) {
+async function buyItem({
+  id,
+  setModalExitoAbierto,
+  setModalErrorAbierto,
+}: {
+  id: number;
+  setModalExitoAbierto: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalErrorAbierto: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   console.log(`el id es: ${id}`);
 
 
