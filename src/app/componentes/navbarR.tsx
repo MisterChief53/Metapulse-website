@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Accordion,
   AccordionItem,
@@ -71,7 +72,7 @@ const Navbarr = () => {
       </div>
       <div className="flex w-1/2 items-center justify-end gap-16 mr-8">
         <div className="flex items-center gap-4">
-          <img src="/images/coin.png" alt="monedas jugador" className="w-10" />
+          <Image src="/images/coin.png" alt="monedas jugador" className="w-10" />
           <div className="text-white">{userData.money}</div>
         </div>
 

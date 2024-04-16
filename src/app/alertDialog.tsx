@@ -58,13 +58,21 @@ async function buyItem({
   }
 }
 
-export function AlertDialogDemo({ buttonText, idItem }) {
+type AlertDialogProps = {
+  buttonText: string;
+  idItem: string;
+};
+
+export function AlertDialogDemo({ buttonText, idItem }: AlertDialogProps) {
   const [modalExitoAbierto, setModalExitoAbierto] = useState(false);
   const [modalErrorAbierto, setModalErrorAbierto] = useState(false);
 
   const handleAccept = () => {
-    buyItem({ id: idItem, setModalExitoAbierto, setModalErrorAbierto });
+    buyItem({ id: Number(idItem), setModalExitoAbierto, setModalErrorAbierto });
   };
+
+ 
+  
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);

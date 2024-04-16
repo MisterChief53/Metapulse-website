@@ -1,5 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 function Items({ items }) {
   console.log(items);
@@ -19,7 +20,7 @@ function Items({ items }) {
            
           onClick={() => handleClick(item.id)}
         >
-          <img
+          <Image
             src={item.item.imagePath}
             style={{ width: '288px', height: '180px', padding: '16px' }}
           />
@@ -27,7 +28,7 @@ function Items({ items }) {
               <div className="flex items-center gap-4">
                 <div className="h-1/2 flex items-center justify-center">
                   <div className="w-5 h-5 rounded-md overflow-hidden">
-                    <img
+                    <Image
                       src="/images/coin.png"
                       alt="Imagen item"
                       className="w-full h-full object-cover"
