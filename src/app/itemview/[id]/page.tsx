@@ -2,13 +2,31 @@
 import { AlertDialogDemo } from '@/app/alertDialog';
 import Navbarr from '../../componentes/navbarR';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ItemViewRouteParams {
   id: number;
 }
 
+interface ItemResponse {
+  id: number;
+  description: string;
+  price: number;
+  item: {
+    id: number;
+    name: string;
+    description: string;
+    code: string;
+    username: string;
+    imagePath: string;
+    ip: string;
+    tradableStatus: boolean;
+  };
+}
+
 function ItemViewPage({ params }: { params: { id: number } }) {
+  const [itemDetails, setItemDetails] = useState<ItemResponse>();
+
   useEffect(() => {
     async function getItem(id: number) {
       // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
@@ -17,6 +35,7 @@ function ItemViewPage({ params }: { params: { id: number } }) {
       });
 
       const data = await res.json();
+      setItemDetails(data);
       return data;
     }
     const item = getItem(params.id);
@@ -29,12 +48,12 @@ function ItemViewPage({ params }: { params: { id: number } }) {
         {/* Lado izquierdo */}
         <div className="w-1/2 flex flex-col p-8">
           <label htmlFor="titleItem" className="text-textGray text-3xl ">
-            {item.item.name}
+            {itemDetails?.item.name}
           </label>
           {/* Imagen item */}
           <div className="h-3/4 mx-auto">
             <div className="h-full rounded-md overflow-hidden">
-              <img src={item.item.imagePath} alt="Imagen item" />
+              <img src={itemDetails?.item.imagePath} alt="Imagen item" />
             </div>
           </div>
         </div>
@@ -52,7 +71,7 @@ function ItemViewPage({ params }: { params: { id: number } }) {
               <textarea
                 id="descripcionItem"
                 className="w-full h-full rounded-md resize-none"
-                value={item.description}
+                value={itemDetails?.description}
                 readOnly
               ></textarea>
             </div>
@@ -71,7 +90,7 @@ function ItemViewPage({ params }: { params: { id: number } }) {
                     />
                   </div>
                 </div>
-                <p className="text-white text-xl">{item.price}</p>
+                <p className="text-white text-xl">{itemDetails?.price}</p>
               </div>
             </div>
             {/* Boton buy */}
