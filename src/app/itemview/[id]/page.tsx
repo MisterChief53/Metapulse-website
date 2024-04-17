@@ -1,26 +1,26 @@
+'use client';
 import { AlertDialogDemo } from '@/app/alertDialog';
 import Navbarr from '../../componentes/navbarR';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
-
-
-
-
-async function getItem(id: number) {
-  // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
-  const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
-    method: 'GET',
-  });
-
-  const data = await res.json();
-  return data;
-}
+import { useEffect } from 'react';
 
 interface ItemViewRouteParams {
-  id: number; 
+  id: number;
 }
 
-async function ItemViewPage({ params }: { params: { id: number } }) {
-  const item = await getItem(params.id);
+function ItemViewPage({ params }: { params: { id: number } }) {
+  useEffect(() => {
+    async function getItem(id: number) {
+      // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
+      const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
+        method: 'GET',
+      });
+
+      const data = await res.json();
+      return data;
+    }
+    const item = getItem(params.id);
+  }, []);
 
   return (
     <div className="bg-backgroundBlue min-h-screen w-screen flex flex-col mx-auto p-0 overflow-y-auto">
