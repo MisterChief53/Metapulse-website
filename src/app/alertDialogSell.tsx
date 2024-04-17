@@ -15,10 +15,27 @@ import { Button } from '@/components/ui/button';
 import * as React from 'react';
 import { useState } from 'react';
 
-async function sellItem({
+type ItemDetails = {
+  id: number | string;
+  price: number | string;
+  descripcion: string;
+};
+
+type AlertDialogProps = {
+  buttonText: string;
+  itemDetails: ItemDetails;
+};
+
+
+export async function sellItem({
   itemDetails,
   setModalExitoAbierto,
   setModalErrorAbierto,
+}:
+{
+  itemDetails: ItemDetails; 
+  setModalExitoAbierto: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalErrorAbierto: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   try {
     const myHeaders = new Headers();
@@ -29,7 +46,7 @@ async function sellItem({
     formdata.append('price', itemDetails.price.toString());
     formdata.append('description', itemDetails.descripcion.toString());
 
-    const reqOptions = {
+    const reqOptions: RequestInit= {
       method: 'POST',
       headers: myHeaders,
       body: formdata,
@@ -57,7 +74,7 @@ async function sellItem({
   }
 }
 
-export function AlertDialogSell({ buttonText, itemDetails }) {
+export function AlertDialogSell({ buttonText, itemDetails }: AlertDialogProps) {
   const [modalExitoAbierto, setModalExitoAbierto] = useState(false);
   const [modalErrorAbierto, setModalErrorAbierto] = useState(false);
 

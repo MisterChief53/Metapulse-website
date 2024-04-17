@@ -3,7 +3,10 @@ import Navbarr from '../../componentes/navbarR';
 import Image from 'next/image';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 
-async function getItem(id) {
+
+
+
+async function getItem(id: number) {
   // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
   const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
     method: 'GET',
@@ -13,7 +16,11 @@ async function getItem(id) {
   return data;
 }
 
-async function ItemViewPage({ params }) {
+interface ItemViewRouteParams {
+  id: number; 
+}
+
+async function ItemViewPage({ params }: { params: { id: number } }) {
   const item = await getItem(params.id);
 
   return (
@@ -70,7 +77,7 @@ async function ItemViewPage({ params }) {
             </div>
             {/* Boton buy */}
             <div>
-              <AlertDialogDemo buttonText="Buy" idItem={params.id} />
+              <AlertDialogDemo buttonText="Buy" idItem={String(params.id)} />
             </div>
           </div>
         </div>

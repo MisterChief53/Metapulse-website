@@ -10,7 +10,7 @@ export const Inventory = () => {
   const [tokenState, setTokenState] = useState('');
 
   useEffect(() => {
-    const getUserItems = async (name) => {
+    const getUserItems = async (name: string) => {
       try {
         let formData = new FormData();
         formData.append('name', name);

@@ -32,7 +32,7 @@ const Navbarr = () => {
 
   const [userData, setUserData] = useState({ name: '', money: 0 });
   useEffect(() => {
-    const fetchUserInfo = async (token) => {
+    const fetchUserInfo = async (token: string) => {
       //const token = localStorage.getItem('token');
       console.log('Token obtenido en nav:', token);
 
@@ -56,7 +56,9 @@ const Navbarr = () => {
     };
 
     const token = localStorage.getItem('token');
-    fetchUserInfo(token); //Se pasa como parametrp
+    if (token) {
+      fetchUserInfo(token); //Se pasa como parametrp
+    }
   }, []);
 
   return (

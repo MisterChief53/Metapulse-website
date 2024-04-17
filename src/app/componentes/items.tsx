@@ -2,11 +2,26 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-function Items({ items }) {
+type Item = {
+  id: number; 
+  price: number; 
+  item: {
+    name: string;
+    imagePath: string;
+    
+  };
+  
+};
+
+type Props = {
+  items: Item[]; // Especifica que items es un array de objetos del tipo Item
+};
+
+function Items({ items }: Props) {
   console.log(items);
   const router = useRouter(); 
 
-  const handleClick = (itemId) => {
+  const handleClick = (itemId: number) => {
     router.push(`/itemview/${itemId}`); 
   };
 
@@ -22,8 +37,7 @@ function Items({ items }) {
         >
           <Image
             src={item.item.imagePath}
-            style={{ width: '288px', height: '180px', padding: '16px' }}
-          />
+            style={{ width: '288px', height: '180px', padding: '16px' }} alt={''}          />
           <div>
               <div className="flex items-center gap-4">
                 <div className="h-1/2 flex items-center justify-center">
