@@ -3,10 +3,21 @@ import { useEffect, useState } from 'react';
 import ItemsList from '../sellview/itemsList';
 import { ItemInfo } from './iteminfo';
 
+interface UserItem {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  username: string;
+  imagePath: string;
+  ip: string;
+  tradableStatus: boolean;
+}
+
 export const Inventory = () => {
   const [itemDetails, setItemDetails] = useState<{ id?: number }>({});
   const [userData, setUserData] = useState({});
-  const [userItems, setUserItems] = useState([]);
+  const [userItems, setUserItems] = useState<UserItem[]>([]);
   const [tokenState, setTokenState] = useState('');
 
   useEffect(() => {

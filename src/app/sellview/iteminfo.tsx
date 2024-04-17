@@ -8,16 +8,15 @@ type ItemInfoProps = {
   setItemDetails: React.Dispatch<React.SetStateAction<any>>; // o el tipo específico que tengas para setItemDetails
 };
 
-
 export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
-  const setItemDescription = (e) => {
+  const setItemDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setItemDetails({
       ...itemDetails,
       ['descripcion']: e.currentTarget.value,
     });
   };
 
-  const setItemPrice = (e) => {
+  const setItemPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setItemDetails({
       ...itemDetails,
       ['price']: Number(e.currentTarget.value),
