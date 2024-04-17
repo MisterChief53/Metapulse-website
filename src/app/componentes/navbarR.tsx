@@ -74,7 +74,7 @@ const Navbarr = () => {
       </div>
       <div className="flex w-1/2 items-center justify-end gap-16 mr-8">
         <div className="flex items-center gap-4">
-          <Image src="/images/coin.png" alt="monedas jugador" className="w-10" />
+          <img src="/images/coin.png" alt="monedas jugador" className="w-10" />
           <div className="text-white">{userData.money}</div>
         </div>
 

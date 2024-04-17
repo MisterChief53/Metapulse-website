@@ -2,7 +2,6 @@
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
-import Image from 'next/image';
 
 
 export const ItemInfo = ({ itemDetails, setItemDetails }) => {
@@ -27,7 +26,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }) => {
         {/* Imagen Item */}
         <div className="w-2/5">
           <div className="w-auto rounded-lg overflow-hidden">
-            <Image
+            <img
               src={
                 itemDetails
                   ? itemDetails.imagePath
@@ -45,7 +44,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }) => {
           </h1>
           <div className="flex flex-col mt-10 gap-4">
             <div className="w-10 h-10 rounded-md overflow-hidden">
-              <Image
+              <img
                 src="/images/coin.png"
                 alt="Imagen item"
                 className="w-full h-full object-cover"
