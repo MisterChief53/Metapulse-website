@@ -44,7 +44,10 @@ export async function sellItem({
     const formdata = new FormData();
     formdata.append('item_id', itemDetails.id.toString());
     formdata.append('price', itemDetails.price.toString());
-    formdata.append('description', itemDetails.descripcion.toString());
+    if (itemDetails.descripcion !== undefined) {
+      formdata.append('description', itemDetails.descripcion.toString());
+    } else { console.error('Error');}
+    //formdata.append('description', itemDetails.descripcion.toString());
 
     const reqOptions: RequestInit= {
       method: 'POST',

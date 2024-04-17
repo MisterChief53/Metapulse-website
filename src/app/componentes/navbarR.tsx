@@ -20,7 +20,9 @@ const Navbarr = () => {
     router.push('/');
   };
 
-  const token = localStorage.getItem('token');
+  //const token = localStorage.getItem('token');
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
 
   const handleSellClick = () => {
     // Verificar que el token esté definido antes de redirigir
@@ -33,7 +35,7 @@ const Navbarr = () => {
   const [userData, setUserData] = useState({ name: '', money: 0 });
   useEffect(() => {
     const fetchUserInfo = async (token: string) => {
-      //const token = localStorage.getItem('token');
+  
       console.log('Token obtenido en nav:', token);
 
       //if (token) {

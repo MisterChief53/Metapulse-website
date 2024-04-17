@@ -1,4 +1,6 @@
 import { Inventory } from './inventory';
+
+
 import NavbarR from '../componentes/navbarR';
 
 const Page = () => {
