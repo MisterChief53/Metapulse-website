@@ -1,6 +1,27 @@
 import { ButtonInventory } from './buttonInventory';
 
-const ItemsList = ({ itemsList, setItemDetails }) => {
+interface UserItem {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  username: string;
+  imagePath: string;
+  ip: string;
+  tradableStatus: boolean;
+}
+
+interface ItemsListProps {
+  userItems: UserItem[];
+}
+
+const ItemsList = ({
+  itemsList,
+  setItemDetails,
+}: {
+  itemsList: UserItem[];
+  setItemDetails: React.Dispatch<React.SetStateAction<any>>;
+}) => {
   return (
     <>
       {itemsList.map((item) => {
