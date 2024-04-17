@@ -3,8 +3,13 @@ import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
 
+type ItemInfoProps = {
+  itemDetails: any; // o el tipo específico que tengas para itemDetails
+  setItemDetails: React.Dispatch<React.SetStateAction<any>>; // o el tipo específico que tengas para setItemDetails
+};
 
-export const ItemInfo = ({ itemDetails, setItemDetails }) => {
+
+export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
   const setItemDescription = (e) => {
     setItemDetails({
       ...itemDetails,

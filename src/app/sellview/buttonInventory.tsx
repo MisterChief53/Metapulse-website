@@ -1,4 +1,4 @@
-export const ButtonInventory = ({ item, setItemDetails }) => {
+export const ButtonInventory = ({ item, setItemDetails }: { item: any; setItemDetails: Function }) => {
   return (
     <button
       className=" border-black border-2 rounded-md w-10/12 mx-auto py-2 flex justify-start mt-4 hover:bg-slate-500"
@@ -13,3 +13,5 @@ export const ButtonInventory = ({ item, setItemDetails }) => {
     </button>
   );
 };
+
+

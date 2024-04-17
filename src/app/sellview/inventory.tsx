@@ -4,7 +4,7 @@ import ItemsList from '../sellview/itemsList';
 import { ItemInfo } from './iteminfo';
 
 export const Inventory = () => {
-  const [itemDetails, setItemDetails] = useState({});
+  const [itemDetails, setItemDetails] = useState<{ id?: number }>({});
   const [userData, setUserData] = useState({});
   const [userItems, setUserItems] = useState([]);
   const [tokenState, setTokenState] = useState('');
