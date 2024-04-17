@@ -1,6 +1,5 @@
 import { AlertDialogDemo } from '@/app/alertDialog';
 import Navbarr from '../../componentes/navbarR';
-import Image from 'next/image';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 
 
@@ -35,7 +34,7 @@ async function ItemViewPage({ params }: { params: { id: number } }) {
           {/* Imagen item */}
           <div className="h-3/4 mx-auto">
             <div className="h-full rounded-md overflow-hidden">
-              <Image src={item.item.imagePath} alt="Imagen item" />
+              <img src={item.item.imagePath} alt="Imagen item" />
             </div>
           </div>
         </div>
@@ -65,7 +64,7 @@ async function ItemViewPage({ params }: { params: { id: number } }) {
               <div className="flex items-center gap-4">
                 <div className="h-1/2 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-md overflow-hidden">
-                    <Image
+                    <img
                       src="/images/coin.png"
                       alt="Imagen item"
                       className="w-full h-full object-cover"

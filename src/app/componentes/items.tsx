@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+
 
 type Item = {
   id: number; 
@@ -35,14 +35,14 @@ function Items({ items }: Props) {
            
           onClick={() => handleClick(item.id)}
         >
-          <Image
+          <img
             src={item.item.imagePath}
             style={{ width: '288px', height: '180px', padding: '16px' }} alt={''}          />
           <div>
               <div className="flex items-center gap-4">
                 <div className="h-1/2 flex items-center justify-center">
                   <div className="w-5 h-5 rounded-md overflow-hidden">
-                    <Image
+                    <img
                       src="/images/coin.png"
                       alt="Imagen item"
                       className="w-full h-full object-cover"
