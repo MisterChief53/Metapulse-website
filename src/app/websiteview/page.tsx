@@ -2,17 +2,30 @@ import NavbarR from '../componentes/navbarR';
 import Items from '../componentes/items';
 
 async function fetchItems() {
-  const res = await fetch(`http://localhost:8080/sales/items`, {
-    method: 'GET',
-    headers: {
-      'Cache-Control': 'no-cache', // Solicitar que no se almacene en caché en el navegador
-      Pragma: 'no-cache', // Para evitar la caché en versiones antiguas de HTTP/1.0
-    },
-    cache: 'no-cache',
-  });
+  try
+  {
+    const res = await fetch(`http://localhost:8080/sales/items`, {
+      method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache', // Solicitar que no se almacene en caché en el navegador
+        Pragma: 'no-cache', // Para evitar la caché en versiones antiguas de HTTP/1.0
+      },
+      cache: 'no-cache',
+    });
 
-  const data = await res.json();
+    if (!res.ok) {
+      throw new Error('Failed to fetch items');
+    }
+
+    const data = await res.json();
   return data;
+
+  } catch (error){
+    console.error('Error fetching items:', error);
+    return [];
+  }
+  
+  
 }
 
 async function Page() {
