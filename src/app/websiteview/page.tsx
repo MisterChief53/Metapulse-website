@@ -16,7 +16,7 @@ function Page() {
   const [itemsSell, setItemsSell] = useState<Item[]>([]);
 
   useEffect(() => {
-    async function fetchItems() {
+    const intervalId = setInterval(async () => {
       try {
         const res = await fetch(`http://localhost:8080/sales/items`, {
           method: 'GET',
@@ -33,13 +33,13 @@ function Page() {
 
         const data = await res.json();
         setItemsSell(data);
-        return data;
       } catch (error) {
         console.error('Error fetching items:', error);
-        return [];
       }
-    }
-    const items = fetchItems();
+    }, 5000); // 5000 milliseconds is 5 seconds
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
