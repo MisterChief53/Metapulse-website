@@ -4,8 +4,8 @@ import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
 
 type ItemInfoProps = {
-  itemDetails: any; // o el tipo específico que tengas para itemDetails
-  setItemDetails: React.Dispatch<React.SetStateAction<any>>; // o el tipo específico que tengas para setItemDetails
+  itemDetails: any; 
+  setItemDetails: React.Dispatch<React.SetStateAction<any>>; 
 };
 
 export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
