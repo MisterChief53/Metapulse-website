@@ -16,11 +16,18 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
     });
   };
 
+  //Verificacion de que el precio sea positivo
   const setItemPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemDetails({
+    const value = Number(e.currentTarget.value);
+    if (value >= 0){
+      setItemDetails({
       ...itemDetails,
-      ['price']: Number(e.currentTarget.value),
+      ['price']: value,
     });
+    }else{
+      //alert('');
+    }
+    
   };
 
   return (
