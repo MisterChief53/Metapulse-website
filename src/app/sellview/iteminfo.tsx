@@ -25,7 +25,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
       ['price']: value,
     });
     }else{
-      //alert('');
+      alert('Price not supported, please change It');
     }
     
   };
