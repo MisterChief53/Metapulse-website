@@ -4,11 +4,13 @@ import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
 
 type ItemInfoProps = {
-  itemDetails: any; 
-  setItemDetails: React.Dispatch<React.SetStateAction<any>>; 
+  itemDetails: any;
+  setItemDetails: React.Dispatch<React.SetStateAction<any>>;
 };
 
 export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
+  const [errorPrice, setErrorPrice] = useState('');
+
   const setItemDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setItemDetails({
       ...itemDetails,
@@ -19,15 +21,15 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
   //Verificacion de que el precio sea positivo
   const setItemPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.currentTarget.value);
-    if (value >= 0){
+    if (value >= 0) {
       setItemDetails({
-      ...itemDetails,
-      ['price']: value,
-    });
-    }else{
-      alert('Price not supported, please change It');
+        ...itemDetails,
+        ['price']: value,
+      });
+      setErrorPrice('');
+    } else {
+      setErrorPrice('Price not supported, please change It');
     }
-    
   };
 
   return (
@@ -71,6 +73,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
               defaultValue={itemDetails.price}
               onChange={setItemPrice}
             />
+            <h2 className="text-red-500">{errorPrice}</h2>
           </div>
         </div>
       </div>
