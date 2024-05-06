@@ -6,30 +6,38 @@ function Login() {
   const [name, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [mensajeError, setMensajeError] = useState(''); // State for error message
-
+  
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Creating form data to send to the server
     const formData = new FormData();
     formData.append('name', name);
     formData.append('password', password);
 
     try {
+      // Sending a POST request to the server for login
       const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         body: formData,
       });
 
       if (response.status === 200) {
-        // Inicio de sesión exitoso, maneja los datos de respuesta (potencialmente un token)
+        // If login is successful, extract the token from the response 
         const token = await response.text();
-        console.log('Inicio de sesión exitoso, aquí tienes tu token:', token);
-        localStorage.setItem('token', token); // El token es guardado como variable local en el navegador para uso posterior
+        console.log('Successful login, here is your token:', token);
+        // Store the token in the browser's local storage for later use
+        localStorage.setItem('token', token); 
 
+
+        // Redirect to another page after successful login
         window.location.href = '/websiteview';
-        // Lo siguiente es una prueba de autenticacion con el token, se manda a llamar al endpoint /auth/secure
-        // que es un endpoint de prueba para verificar el endpoint, se supone que cada endpoint que necesite
-        // verificacion solo deba de pedir el token, el token se manda por el header
+        // The following is an authentication test with the token, calling the /auth/secure endpoint.
+        // This endpoint is a test endpoint to verify authentication. The expectation is that every endpoint
+        // requiring verification should only need to request the token, which is sent through the header.
+
+        // Checking user authentication by calling a secure endpoint
         const profileResponse = await fetch(
           'http://localhost:8080/auth/secure',
           {
@@ -42,18 +50,22 @@ function Login() {
 
         if (profileResponse.status === 200) {
           const userData = await profileResponse.text();
-          console.log('El usuario es:', userData);
+          // If the user is authenticated, log their data
+          console.log('The user is:', userData);
         } else {
-          console.log('No se encontro tal usuario');
+          // If user not found, log an error
+          console.log('The user was not found');
         }
 
-        // Almacena el token en el almacenamiento local o úsalo para llamadas API posteriores
+        //Store the token in local storage or use it for subsequent API calls
       } else {
-        throw new Error('Inicio de sesión fallido');
+        // If login is unsuccessful, throw an error
+        throw new Error('Failed login');
       }
     } catch (error) {
-      console.error('Error de inicio de sesión:', error.message);
-      setMensajeError('Nombre de usuario o contraseña no válidos'); // Set error message
+      // If any error occurs during login, log the error and set an error message
+      console.error('Login error:', error.message);
+      setMensajeError('Invalid username or password'); // Set error message
     }
   };
 
@@ -63,6 +75,7 @@ function Login() {
         <strong>USER LOGIN</strong>
       </h1>
       <form onSubmit={handleSubmit}>
+         {/* Input fields for username and password */}
         <input
           type="text"
           name="name"
@@ -75,6 +88,7 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {/* Button to submit the form */}
         <button type="submit">LOGIN</button>
       </form>
       {mensajeError && <p className="error-message">{mensajeError}</p>}{' '}
