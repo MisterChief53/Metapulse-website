@@ -1,3 +1,4 @@
+// Import necessary modules and components
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -12,57 +13,69 @@ import {
 
 import { useState, useEffect } from 'react';
 
+// Define the functional component Navbar
 const Navbarr = () => {
+  // Initialize router
   const router = useRouter();
 
+  // Define function to handle sign out
   const handleSignOut = () => {
+    // Remove token from local storage
     localStorage.removeItem('token');
+    // Redirect to home page
     router.push('/');
   };
 
-  //const token = localStorage.getItem('token');
+// Check if token is available in local storage
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-
+  // Define function to handle sell click
   const handleSellClick = () => {
-    // Verificar que el token esté definido antes de redirigir
+    // Check if token exists
     if (token) {
-      // Redirigir a la página sellview con el token como parámetro de consulta
+      // Redirect to sellview page with token as query parameter
       router.push(`/sellview?token=${token}`);
     }
   };
 
+    // Initialize state for user data
   const [userData, setUserData] = useState({ name: '', money: 0 });
+  // Fetch user info from server on component mount
   useEffect(() => {
     const fetchUserInfo = async (token: string) => {
-  
-      console.log('Token obtenido en nav:', token);
+      // Log token obtained in nav
+      console.log('Token obtained in nav:', token);
 
       //if (token) {
       try {
+         // Check if token exists
         if (token) {
+          // Fetch user info from server
           const response = await fetch('http://localhost:8080/auth/userInfo', {
             headers: {
               Authorization: token,
             },
           });
-
+          // If response is successful, update user data state
           if (response.ok) {
             const data = await response.json();
             setUserData(data);
           }
         }
       } catch (error) {
-        console.error('Error al obtener datos del usuario:', error);
+        // Log error if encountered while fetching user info
+        console.error('Error fetching user data:', error);
       }
     };
 
+    // Get token from local storage and fetch user info if token exists
     const token = localStorage.getItem('token');
     if (token) {
       fetchUserInfo(token); //Se pasa como parametrp
     }
   }, []);
 
+  // Return JSX for header component
   return (
     <header className="flex bg-navbarPurple py-4">
       <div className="flex w-1/2 ml-8">
