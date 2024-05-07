@@ -1,13 +1,16 @@
+// Import necessary modules and components
 'use client';
 import { AlertDialogDemo } from '@/app/alertDialog';
 import Navbarr from '../../componentes/navbarR';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import { useEffect, useState } from 'react';
 
+// Define interface for route parameters of ItemViewPage
 interface ItemViewRouteParams {
   id: number;
 }
 
+// Define interface for the response received for item details
 interface ItemResponse {
   id: number;
   description: string;
@@ -24,23 +27,31 @@ interface ItemResponse {
   };
 }
 
+// Define the functional component ItemViewPage
 function ItemViewPage({ params }: { params: { id: number } }) {
+  // Initialize state to hold item details
   const [itemDetails, setItemDetails] = useState<ItemResponse>();
 
+  // Fetch item details from server on component mount
   useEffect(() => {
     async function getItem(id: number) {
-      // const res = await fetch(`http://localhost:8080/sales/items/${id}`);
+      // Fetch item details from server      
       const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
         method: 'GET',
       });
 
+      // Parse response data as JSON
       const data = await res.json();
+      // Set item details in state
       setItemDetails(data);
       return data;
     }
+
+    // Call getItem function with item ID from route parameters
     const item = getItem(params.id);
   }, []);
 
+  // Return JSX for rendering the item view page
   return (
     <div className="bg-backgroundBlue min-h-screen w-screen flex flex-col mx-auto p-0 overflow-y-auto">
       <Navbarr />
