@@ -3,35 +3,40 @@ import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
 
+// Define type for ItemInfoProps
 type ItemInfoProps = {
   itemDetails: any;
   setItemDetails: React.Dispatch<React.SetStateAction<any>>;
 };
 
+// Define functional component ItemInfo
 export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
+  // Initialize state variable for error message related to price
   const [errorPrice, setErrorPrice] = useState('');
 
+  // Function to set item description
   const setItemDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setItemDetails({
       ...itemDetails,
-      ['descripcion']: e.currentTarget.value,
+      ['descripcion']: e.currentTarget.value, // Update item description in itemDetails state
     });
   };
 
-  //Verificacion de que el precio sea positivo
+  // Function to set item price
   const setItemPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.currentTarget.value);
     if (value >= 0) {
       setItemDetails({
         ...itemDetails,
-        ['price']: value,
+        ['price']: value, // Update item price in itemDetails state
       });
-      setErrorPrice('');
+      setErrorPrice(''); // Clear error message
     } else {
-      setErrorPrice('Price not supported, please change It');
+      setErrorPrice('Price not supported, please change It');// Set error message
     }
   };
 
+   // Return JSX for rendering the item information
   return (
     <div className="w-1/2 bg-backgroundPurple rounded-md flex flex-col p-6 h-full">
       {/* Flex-row 1 */}
@@ -50,12 +55,13 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
           </div>
         </div>
 
-        {/* Nombre item y input */}
+        {/* Item Name and Input */}
         <div className="w-auto flex flex-col ml-8">
           <h1 className="text-5xl font-bold text-textGray w-full text-left">
             {itemDetails ? itemDetails.name : 'Item X'}
           </h1>
           <div className="flex flex-col mt-10 gap-4">
+            {/* Coin Image */}
             <div className="w-10 h-10 rounded-md overflow-hidden">
               <img
                 src="/images/coin.png"
@@ -64,6 +70,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
               />
             </div>
 
+            {/* Input for Price */}
             <input
               type="text"
               name="price"
@@ -94,6 +101,7 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
       <div className="flex flex-grow justify-end">
         {/* Boton sell */}
         <div>
+          {/* Render AlertDialogSell component with buttonText and itemDetails props */}
           <AlertDialogSell buttonText="Sell" itemDetails={itemDetails} />
         </div>
       </div>
