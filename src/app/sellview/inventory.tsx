@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ItemsList from '../sellview/itemsList';
 import { ItemInfo } from './iteminfo';
 
+// Define interface for user item
 interface UserItem {
   id: number;
   name: string;
@@ -14,12 +15,14 @@ interface UserItem {
   tradableStatus: boolean;
 }
 
+// Define functional component Inventory
 export const Inventory = () => {
   const [itemDetails, setItemDetails] = useState<{ id?: number }>({});
   const [userData, setUserData] = useState({});
   const [userItems, setUserItems] = useState<UserItem[]>([]);
   const [tokenState, setTokenState] = useState('');
 
+  // Fetch user's items and user info on component mount
   useEffect(() => {
     const getUserItems = async (name: string) => {
       try {
@@ -31,6 +34,7 @@ export const Inventory = () => {
           cache: 'no-cache',
         });
 
+        // If response is successful, update user items state
         if (res.ok) {
           const data = await res.json();
           setUserItems(data);
@@ -43,12 +47,14 @@ export const Inventory = () => {
       }
     };
 
+    // Function to fetch user info
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         setTokenState(token);
         try {
           if (token) {
+            // Fetch user info from the server
             const response = await fetch(
               'http://localhost:8080/auth/userInfo',
               {
@@ -57,7 +63,7 @@ export const Inventory = () => {
                 },
               }
             );
-
+            // If response is successful, update user data state and fetch user items
             if (response.ok) {
               const data = await response.json();
               setUserData(data);
@@ -70,9 +76,11 @@ export const Inventory = () => {
       }
     };
 
+    // Call fetchUserInfo function
     fetchUserInfo();
   }, []);
 
+  // Return JSX for rendering the inventory
   return (
     <>
       <div className="w-1/2 flex flex-col">
@@ -90,6 +98,7 @@ export const Inventory = () => {
             style={{ maxHeight: '470px' }} //
             id="ContenedorItems"
           >
+            {/* Render ItemsList component with userItems and setItemDetails prop */}
             <ItemsList itemsList={userItems} setItemDetails={setItemDetails} />
           </div>
         </form>
