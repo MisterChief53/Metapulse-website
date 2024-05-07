@@ -1,7 +1,8 @@
+// Import necessary modules and components
 'use client';
 import { useRouter } from 'next/navigation';
 
-
+// Define the type for an item
 type Item = {
   id: number; 
   price: number; 
@@ -13,18 +14,25 @@ type Item = {
   
 };
 
+// Define the type for Props passed to the Items component
 type Props = {
-  items: Item[]; // Especifica que items es un array de objetos del tipo Item
+  items: Item[]; // Specifies that items is an array of objects of type Item
 };
 
+// Define the functional component Items
 function Items({ items }: Props) {
+  // Log items to console for debugging
   console.log(items);
+  // Initialize router
   const router = useRouter(); 
 
+  // Define function to handle click on an item
   const handleClick = (itemId: number) => {
+    // Redirect to the itemview page with item ID as parameter
     router.push(`/itemview/${itemId}`); 
   };
 
+   // Return JSX for rendering the list of items
   return (
     <div className="grid grid-cols-4 gap-4">
       {items.map((item) => (
