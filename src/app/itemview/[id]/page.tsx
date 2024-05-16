@@ -1,9 +1,9 @@
+'use client'; // Marca el componente como un componente de cliente
 // Import necessary modules and components
-'use client';
-import { AlertDialogDemo } from '@/app/alertDialog';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import Navbarr from '../../componentes/navbarR';
-import { AlertDialog } from '@radix-ui/react-alert-dialog';
-import { useEffect, useState } from 'react';
+import { AlertDialogDemo } from '@/app/alertDialog';
 
 // Define interface for route parameters of ItemViewPage
 interface ItemViewRouteParams {
@@ -27,29 +27,63 @@ interface ItemResponse {
   };
 }
 
+// Define interface for the current user
+interface CurrentUser {
+  id: number;
+  name: string;
+}
+
 // Define the functional component ItemViewPage
-function ItemViewPage({ params }: { params: { id: number } }) {
+function ItemViewPage({ params }: { params: ItemViewRouteParams }) {
   // Initialize state to hold item details
   const [itemDetails, setItemDetails] = useState<ItemResponse>();
+  // Initialize state to hold whether the user is the owner of the item
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const router = useRouter();
 
   // Fetch item details from server on component mount
+ 
   useEffect(() => {
     async function getItem(id: number) {
-      // Fetch item details from server      
-      const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
-        method: 'GET',
-      });
+      try {
+        const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
+          method: 'GET',
+        });
+        const data = await res.json();
+        console.log('Item details:', data);
 
-      // Parse response data as JSON
-      const data = await res.json();
-      // Set item details in state
-      setItemDetails(data);
-      return data;
+        // Set item details in state
+        setItemDetails(data);
+
+        // Checking user authentication by calling a secure endpoint
+        const token = localStorage.getItem('token');
+        if (token !== null) {
+          const profileResponse = await fetch('http://localhost:8080/auth/secure', {
+            method: 'GET',
+            headers: {
+              Authorization: token,
+            },
+          });
+
+          if (profileResponse.status === 200) {
+            const userData = await profileResponse.text();
+            console.log('User data:', userData);
+            // Comparing username with item's username
+            setIsOwner(userData === data.item.username);
+          } else {
+            console.log('The user was not found');
+          }
+        } else {
+          console.log('El token no está disponible');
+        }
+      } catch (error) {
+        console.error('Error fetching item details:', error);
+      }
     }
 
-    // Call getItem function with item ID from route parameters
     const item = getItem(params.id);
-  }, []);
+  }, [params.id]);
+
 
   // Return JSX for rendering the item view page
   return (
@@ -106,7 +140,8 @@ function ItemViewPage({ params }: { params: { id: number } }) {
             </div>
             {/* Boton buy */}
             <div>
-              <AlertDialogDemo buttonText="Buy" idItem={String(params.id)} />
+            <AlertDialogDemo buttonText="Buy" idItem={String(params.id)} isOwner={isOwner} />
+
             </div>
           </div>
         </div>

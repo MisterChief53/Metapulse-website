@@ -58,7 +58,7 @@ function Items({ items }: Props) {
                   </div>
                 </div>
                 <p className="text-white">{item.price}</p>
-                <p className="text-white">{item.id}</p>
+
               </div>
             </div>
           
