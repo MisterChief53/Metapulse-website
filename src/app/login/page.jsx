@@ -15,6 +15,8 @@ function Login() {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('password', password);
+    // Adding the 'source' field with value 0 - website login
+    formData.append('source', 0);
 
     try {
       // Sending a POST request to the server for login

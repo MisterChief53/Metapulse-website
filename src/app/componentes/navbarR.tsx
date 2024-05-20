@@ -19,11 +19,38 @@ const Navbarr = () => {
   const router = useRouter();
 
   // Define function to handle sign out
-  const handleSignOut = () => {
+ /* const handleSignOut = async() => {
     // Remove token from local storage
     localStorage.removeItem('token');
     // Redirect to home page
     router.push('/');
+  };*/
+
+  const handleSignOut = async () => {
+    const token = localStorage.getItem('token');
+  
+    try {
+      // Verifica si el token no es nulo antes de hacer la solicitud fetch
+      if (token) {
+        const response = await fetch('http://localhost:8080/auth/logout', {
+          method: 'POST',
+          headers: {
+            Authorization: token,
+          },
+        });
+  
+        if (response.ok) {
+          localStorage.removeItem('token');
+          router.push('/');
+        } else {
+          console.error('Logout error:', response.statusText);
+        }
+      } else {
+        console.error('No token found');
+      }
+    } catch (error) {
+      console.error('Logout error:');
+    }
   };
 
 // Check if token is available in local storage
