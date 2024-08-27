@@ -41,7 +41,7 @@ function Login() {
 
         // Checking user authentication by calling a secure endpoint
         const profileResponse = await fetch(
-          'http://localhost:8080/auth/secure',
+          'http://10.103.160.60:8080/auth/secure',
           {
             method: 'GET',
             headers: {
