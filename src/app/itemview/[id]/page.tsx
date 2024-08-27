@@ -36,7 +36,7 @@ function ItemViewPage({ params }: { params: { id: number } }) {
   useEffect(() => {
     async function getItem(id: number) {
       // Fetch item details from server      
-      const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
+      const res = await fetch(`http://10.103.160.60:8080/sales/items/${id}`, {
         method: 'GET',
       });
 
