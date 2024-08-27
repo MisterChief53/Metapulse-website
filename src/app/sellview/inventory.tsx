@@ -28,7 +28,7 @@ export const Inventory = () => {
       try {
         let formData = new FormData();
         formData.append('name', name);
-        const res = await fetch('http://localhost:8080/items/getItemsUser', {
+        const res = await fetch('http://10.103.160.60:8080/items/getItemsUser', {
           method: 'post',
           body: formData,
           cache: 'no-cache',
@@ -56,7 +56,7 @@ export const Inventory = () => {
           if (token) {
             // Fetch user info from the server
             const response = await fetch(
-              'http://localhost:8080/auth/userInfo',
+              'http://10.103.160.60:8080/auth/userInfo',
               {
                 headers: {
                   Authorization: token,
