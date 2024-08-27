@@ -20,7 +20,7 @@ function Login() {
 
     try {
       // Sending a POST request to the server for login
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch('http://10.103.160.60:8080/auth/login', {
         method: 'POST',
         body: formData,
       });
