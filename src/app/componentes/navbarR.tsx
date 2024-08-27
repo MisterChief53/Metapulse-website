@@ -32,7 +32,7 @@ const Navbarr = () => {
     try {
       // Verifica si el token no es nulo antes de hacer la solicitud fetch
       if (token) {
-        const response = await fetch('http://localhost:8080/auth/logout', {
+        const response = await fetch('http://10.103.160.60:8080/auth/logout', {
           method: 'POST',
           headers: {
             Authorization: token,
