@@ -24,7 +24,7 @@ function Page() {
     const intervalId = setInterval(async () => {
       // Fetch items from the server
       try {
-        const res = await fetch(`http://localhost:8080/sales/items`, {
+        const res = await fetch(`http://10.103.160.60:8080/sales/items`, {
           method: 'GET',
           headers: {
             'Cache-Control': 'no-cache', // Request not to cache in browser
