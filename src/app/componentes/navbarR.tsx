@@ -78,7 +78,7 @@ const Navbarr = () => {
          // Check if token exists
         if (token) {
           // Fetch user info from server
-          const response = await fetch('http://localhost:8080/auth/userInfo', {
+          const response = await fetch('http://10.103.160.60:8080/auth/userInfo', {
             headers: {
               Authorization: token,
             },
