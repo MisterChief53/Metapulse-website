@@ -2,7 +2,7 @@ module.exports = {
     reactStrictMode: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://10.103.160.60:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
