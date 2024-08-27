@@ -28,12 +28,12 @@ async function buyItem({
 
 
   try {
-    const itemResponse = await fetch(`http://localhost:8080/sales/items/${id}`);
+    const itemResponse = await fetch(`http://10.103.160.60:8080/sales/items/${id}`);
     const itemData = await itemResponse.json();
     const generalItemId = itemData.item.id;
 
     const saleResponse = await fetch(
-      `http://localhost:8080/sales/buy/${generalItemId}`,
+      `http://10.103.160.60:8080/sales/buy/${generalItemId}`,
       {
         method: 'POST',
         headers: {
