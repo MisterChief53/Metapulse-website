@@ -57,7 +57,7 @@ export async function sellItem({
     };
 
     const itemResult = await fetch(
-      'http://10.103.160.60:8080/sales/items',
+       `${process.env.NEXT_PUBLIC_API_BASE_URL}/sales/items`,
       reqOptions
     );
 
@@ -88,7 +88,7 @@ export function AlertDialogSell({ buttonText, itemDetails }: { buttonText: strin
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);
-    window.location.href = 'http://10.103.160.60:3000/websiteview';
+    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/websiteview`;
   };
   return (
     <>
