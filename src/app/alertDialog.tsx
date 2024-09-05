@@ -28,12 +28,12 @@ async function buyItem({
 
 
   try {
-    const itemResponse = await fetch(`http://10.103.160.60:8080/sales/items/${id}`);
+    const itemResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sales/items/${id}`);
     const itemData = await itemResponse.json();
     const generalItemId = itemData.item.id;
 
     const saleResponse = await fetch(
-      `http://10.103.160.60:8080/sales/buy/${generalItemId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/sales/buy/${generalItemId}`,
       {
         method: 'POST',
         headers: {
