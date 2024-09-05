@@ -2,7 +2,7 @@ module.exports = {
     reactStrictMode: true,
     proxy: {
       '/api': {
-        target: 'http://10.103.160.60:8080',
+        target: NEXT_PUBLIC_API_BASE_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
