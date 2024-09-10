@@ -79,7 +79,7 @@ const Navbarr = () => {
         if (token) {
           // Fetch user info from server
    
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/userInfo`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/auth/userInfo`, {
             headers: {
               Authorization: token,
             },
