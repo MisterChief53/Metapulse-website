@@ -28,12 +28,12 @@ async function buyItem({
 
 
   try {
-    const itemResponse = await fetch(`http://localhost:8080/sales/items/${id}`);
+    const itemResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/sales/items/${id}`);
     const itemData = await itemResponse.json();
     const generalItemId = itemData.item.id;
 
     const saleResponse = await fetch(
-      `http://localhost:8080/sales/buy/${generalItemId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/sales/buy/${generalItemId}`,
       {
         method: 'POST',
         headers: {
@@ -76,7 +76,7 @@ export function AlertDialogDemo({ buttonText, idItem }: AlertDialogProps) {
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);
-    window.location.href = 'http://localhost:3000/websiteview';
+    window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}:3000/websiteview`;
   };
 
   return (

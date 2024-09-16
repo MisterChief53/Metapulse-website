@@ -32,7 +32,7 @@ const Navbarr = () => {
     try {
       // Verifica si el token no es nulo antes de hacer la solicitud fetch
       if (token) {
-        const response = await fetch('http://localhost:8080/auth/logout', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/auth/logout`, {
           method: 'POST',
           headers: {
             Authorization: token,
@@ -78,7 +78,7 @@ const Navbarr = () => {
          // Check if token exists
         if (token) {
           // Fetch user info from server
-          const response = await fetch('http://localhost:8080/auth/userInfo', {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/auth/userInfo`, {
             headers: {
               Authorization: token,
             },

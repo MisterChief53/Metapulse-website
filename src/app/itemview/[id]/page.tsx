@@ -36,7 +36,7 @@ function ItemViewPage({ params }: { params: { id: number } }) {
   useEffect(() => {
     async function getItem(id: number) {
       // Fetch item details from server      
-      const res = await fetch(`http://localhost:8080/sales/items/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/sales/items/${id}`, {
         method: 'GET',
       });
 

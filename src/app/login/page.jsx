@@ -20,7 +20,7 @@ function Login() {
 
     try {
       // Sending a POST request to the server for login
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/auth/login`, {
         method: 'POST',
         body: formData,
       });
@@ -41,7 +41,8 @@ function Login() {
 
         // Checking user authentication by calling a secure endpoint
         const profileResponse = await fetch(
-          'http://localhost:8080/auth/secure',
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}:8080/auth/secure`,
+
           {
             method: 'GET',
             headers: {
