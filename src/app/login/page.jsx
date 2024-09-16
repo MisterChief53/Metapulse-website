@@ -75,7 +75,7 @@ function Login() {
   return (
     <div className="login">
       <h1>
-        <strong>USER LOGIN</strong>
+        <strong>.</strong>
       </h1>
       <form onSubmit={handleSubmit}>
          {/* Input fields for username and password */}

@@ -88,7 +88,8 @@ export function AlertDialogSell({ buttonText, itemDetails }: { buttonText: strin
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}:3000/websiteview`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}:3000/websiteview`;
+
   };
   return (
     <>
