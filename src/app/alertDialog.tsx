@@ -76,7 +76,7 @@ export function AlertDialogDemo({ buttonText, idItem }: AlertDialogProps) {
 
   const returnToMenu = () => {
     setModalExitoAbierto(false);
-    window.location.href = 'http://localhost:3000/websiteview';
+    window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}:3000/websiteview`;
   };
 
   return (
