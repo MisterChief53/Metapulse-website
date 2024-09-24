@@ -24,6 +24,7 @@ type ItemDetails = {
 type AlertDialogProps = {
   buttonText: string;
   itemDetails: ItemDetails;
+  disabled?: boolean;
 };
 
 
@@ -77,7 +78,7 @@ export async function sellItem({
   }
 }
 
-export function AlertDialogSell({ buttonText, itemDetails }: { buttonText: string, itemDetails: ItemDetails }) {
+export function AlertDialogSell({ buttonText, itemDetails, disabled }: AlertDialogProps) {
   const [modalExitoAbierto, setModalExitoAbierto] = useState(false);
   const [modalErrorAbierto, setModalErrorAbierto] = useState(false);
 
@@ -95,7 +96,11 @@ export function AlertDialogSell({ buttonText, itemDetails }: { buttonText: strin
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+          <Button className="text-white bg-blue-700 
+          hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+          font-medium rounded-lg text-sm px-5 py-2.5 me-2 
+          mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 
+          focus:outline-none dark:focus:ring-blue-800" disabled={disabled}>
             {buttonText}
           </Button>
         </AlertDialogTrigger>

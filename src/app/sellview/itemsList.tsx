@@ -29,6 +29,7 @@ const ItemsList = ({
   return (
     <>
     {/* Map through user items and render ButtonInventory component for each item */}
+    <p className="text-gray-500 mt-2 p-4">Click an item for details</p>
       {itemsList.map((item) => {
         return (
           <ButtonInventory

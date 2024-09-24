@@ -84,12 +84,14 @@ function Login() {
           name="name"
           value={name}
           onChange={(e) => setUserName(e.target.value)}
+          placeholder='Username'
         />
         <input
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder='Password'
         />
         {/* Button to submit the form */}
         <button type="submit">LOGIN</button>

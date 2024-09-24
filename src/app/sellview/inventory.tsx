@@ -91,7 +91,7 @@ export const Inventory = () => {
             name="buscador"
             id="buscadorItems"
             placeholder="Search..."
-            className="rounded-md p-2 w-full placeholder-gray-500 text-xl font-bold"
+            className="rounded-md p-4 w-full placeholder-gray-500 text-xl font-bold"
           />
           <div
             className="bg-white mt-1 rounded-sm flex flex-col flex-1 align-middle overflow-y-auto"

@@ -2,6 +2,7 @@
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import { AlertDialogSell } from '../alertDialogSell';
 import { useState } from 'react';
+import {useEffect } from 'react'; 
 
 // Define type for ItemInfoProps
 type ItemInfoProps = {
@@ -13,6 +14,7 @@ type ItemInfoProps = {
 export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
   // Initialize state variable for error message related to price
   const [errorPrice, setErrorPrice] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to control button enable/disable
 
   // Function to set item description
   const setItemDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,17 +26,29 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
 
   // Function to set item price
   const setItemPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.currentTarget.value);
-    if (value >= 0) {
+    const inputValue = e.currentTarget.value;
+  
+    const regex = /^(?!0\d)\d{0,15}(\.\d{0,2})?$/;
+    
+    if (inputValue === '' || regex.test(inputValue)) {
+      const value = parseFloat(inputValue);
       setItemDetails({
         ...itemDetails,
-        ['price']: value, // Update item price in itemDetails state
+        ['price']: value >= 0 ? value : 0, // Ensure the value is non-negative
       });
       setErrorPrice(''); // Clear error message
     } else {
-      setErrorPrice('Price not supported, please change It');// Set error message
+      setErrorPrice('Price must be non-negative, up to 15 digits and 2 decimals.');
     }
   };
+
+    // Use effect to enable/disable button based on validations
+    useEffect(() => {
+      const isPriceValid = itemDetails.price !== undefined && itemDetails.price >= 0;
+      const isDescriptionValid = itemDetails.descripcion && itemDetails.descripcion.trim() !== '';
+  
+      setIsButtonDisabled(!(isPriceValid && isDescriptionValid));
+    }, [itemDetails]);
 
    // Return JSX for rendering the item information
   return (
@@ -102,7 +116,10 @@ export const ItemInfo = ({ itemDetails, setItemDetails }: ItemInfoProps) => {
         {/* Boton sell */}
         <div>
           {/* Render AlertDialogSell component with buttonText and itemDetails props */}
-          <AlertDialogSell buttonText="Sell" itemDetails={itemDetails} />
+          <AlertDialogSell buttonText="Sell" 
+          itemDetails={itemDetails} 
+          disabled={isButtonDisabled} 
+          />
         </div>
       </div>
     </div>
